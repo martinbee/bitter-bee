@@ -1,36 +1,44 @@
-<div class="content">
-  <div class="main">
-    <h1>Pages#index</h1>
-    <p>Find me in app/views/pages/index.html.erb</p>
-    <%= @current_user.nil? %>
+<div class="index">
+  <div class="jumbotron">
+    <h1 class="header">Bitter</h1>
   </div>
+  <div class="container ninety-percent">
 
-  <aside class="col-md-3">
+    <div class="content">
+      <div class="main">
+        <h1>Top Bitches</h1>
+        <p>Find me in app/views/pages/index.html.erb</p>
+        <%= @current_user.nil? %>
+      </div>
 
-    <% if alert %>
-      <%= alert %>
-    <% end %>
+      <aside class="col-md-3 mobile-full-width">
 
-    <h3>Sign in!</h3>
-    <%= simple_form_for(:session, url: :auth) do |f| %>
-        <%= f.input :email, placeholder: "Email", label:false %>
-        <%= f.input :password, placeholder: "Password", label:false %>
-        <%= f.submit "Let Me In", class: "btn btn-primary form-btn" %>
-    <% end %>
+        <% if alert %>
+          <%= alert %>
+        <% end %>
 
-    <% if notice %>
-      <br>
-      <%= notice %>
-    <% end %>
+        <h3>Sign in!</h3>
+        <%= simple_form_for(:session, url: :auth) do |f| %>
+            <%= f.input :email, placeholder: "Email", label:false %>
+            <%= f.input :password, placeholder: "Password", label:false %>
+            <%= f.submit "Let Me In", class: "btn btn-primary form-btn" %>
+        <% end %>
 
-    <h3>Sign Up</h1>
-    <%= simple_form_for @user do |f| %>
-        <%= f.input :username, placeholder: "Username", label:false %>
-        <%= f.input :email, placeholder: "Email", label:false %>
-        <%= f.input :password, placeholder: "Password(Longer than 8 characters)", label:false %>
-        <%= f.input :password_confirmation, placeholder: "Confirm Password", label:false%>
-        <%= f.input :photo, label:"Avatar Image" %>
-        <%= f.submit class: "btn btn-primary form-btn" %>
-    <% end %>
-  </aside>
+        <% if notice %>
+          <br>
+          <%= notice %>
+        <% end %>
+
+        <h3>Sign Up</h1>
+        <%= simple_form_for @user do |f| %>
+            <%= f.input :username, placeholder: "Username", label:false %>
+            <%= f.input :email, placeholder: "Email", label:false %>
+            <%= f.input :password, placeholder: "Password(Longer than 8 characters)", label:false %>
+            <%= f.input :password_confirmation, placeholder: "Confirm Password", label:false%>
+            <%= f.input :photo, label:"Avatar Image" %>
+            <%= f.submit class: "btn btn-primary form-btn" %>
+        <% end %>
+      </aside>
+    </div>
+  </div>
 </div>

@@ -1,17 +1,135 @@
+.index {
+  .container {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .jumbotron{
+    background-color: #19171A;
+    text-align: left;
+
+    .header {
+      color: #54F59F;
+      font-size: 6em;
+      width: 90%;
+      margin: auto;
+     }
+  }
+  .btn, .btn-primary, .form-btn{
+    margin-bottom: 10px !important;
+    background-color: #BB5CF4;
+    border-color: #BB5CF4;
+    &:hover {
+      background-color: #B435FF;
+      border-color: #B435FF;
+    }
+  }
+  .content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    .main {
+      width: 75%;
+    }
+    .aside {
+      float: right;
+    }
+  }
+}
+
+.dashboard-body {
+  background-color: #40FD98; //background color!
+  height: 900px;
+  .dashboard {
+    .nav, .navbar, .navbar-brand {
+      background-color: white;
+      color: black;
+      &:hover {
+        color: grey;
+      }
+    }
+    .dropdown {
+        li {
+          border-radius: 10px;
+        }
+      }
+
+    .open {
+    }
+    .ninety-percent{
+      width: 90%;
+    }
+  }
+
+  .dashboard-content {
+    background-color: #40FD98; //background color!
+    .flex {
+      .user-aside {
+       background-color: white;
+       border-radius: 10px;
+      }
+      .random-user-aside {
+        background-color: white;
+        border-radius: 10px;
+        .list-group-item {
+
+          border-radius: 10px;
+          margin-bottom: 10px;
+        }
+      }
+      .bitch-deck {
+        padding-top: 10px;
+        background-color: white;
+        border-radius: 10px;
+      }
+      .btn, .btn-primary, .bitch-btn{
+        margin-bottom: 10px !important;
+        background-color: #BB5CF4;
+        border-color: #BB5CF4;
+        &:hover {
+          background-color: #B435FF;
+          border-color: #B435FF;
+        }
+      }
+    }
+  }
+
+}
 .ninety-percent{
   width: 90%;
+}
+
+
+
+.header {
+  width: 40%;
+}
+
+.width_40 {
+  width: 40%;
+}
+.username {
+  color:black
 }
 
 .padding {
   padding: 10px;
 }
 
+.no-padding {
+  padding: 0px;
+}
+
+
 .margin-one{
   margin-left: 2.3%;
 }
 
+.margin-left {
+  margin-left: 10px;
+}
+
 .border {
-  border: solid 1px #E67E22;
+  border: solid 1px black;
 }
 .no-margin-bot{
   margin-bottom: 0px;
@@ -39,7 +157,6 @@
   .list-link {
     display: inline;
     padding: 0px;
-    margin-left: 10px;
   }
   .color {
     color: blue;
@@ -54,26 +171,13 @@
   padding: 0px;
 }
 
-.content {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap-reverse;
-
-  .main {
-    width: 75%;
-  }
-  .aside {
-    float: right;
-  }
-}
-
 .photo-bitch {
   display: flex;
 }
 
 .bitch {
   margin-top: 10px;
-  border: 1px solid blue;
+  border: 1px solid #FF7871;
 }
 
 .bitch-btn {
@@ -94,20 +198,105 @@
   float:left;
 }
 
+.center {
+  text-align: center;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.profile {
+  background-color: #6F58FD;
+  height: 900px;
+  .profile-content {
+    width: 24%;
+    margin-right: 10px;
+    background-color: white;
+    border-radius: 10px;
+    .list-group-item {
+      border:none;
+    }
+  }
+  .aside-right {
+    background-color: white;
+    border-radius: 10px;
+
+  }
+  .bitch {
+    font-size: 1.3em;
+  }
+  .nav, .navbar, .navbar-brand {
+    background-color: white;
+    color: black;
+    &:hover {
+      color: grey;
+    }
+  }
+}
+
+.edit {
+  .nav, .navbar, .navbar-brand {
+    background-color: white;
+    color: black;
+    &:hover {
+      color: grey;
+    }
+  }
+
+}
+
 
 @media (max-width: 1050px) {
+
+  .jumbotron {
+    .header {
+      width: 100%;
+    }
+  }
+
   .flex {
    display: flex;
    flex-wrap: wrap;
    flex-direction: row;
   }
 
-.mobile-hide {
-  display:none;
-  overflow: hidden;
+  .profile-content {
+    margin-bottom: 10px;
 }
 
-.border {
-  border: none;
+.random-user-aside {
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.user-aside {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  width: 100%;
+  .subheader {
+    padding-left: 10px;
+  }
+  img {
+      display:none;
+      overflow: hidden;
+  }
+}
+
+.main {
+  padding-left: 15px;
+  padding-right: 15px;
+  width:100%;
+}
+
+.mobile-full-width {
+  width: 100% !important;
+}
+
+.margin-one {
+  margin: 0px;
+}
+
 }

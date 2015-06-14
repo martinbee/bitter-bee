@@ -1,76 +1,129 @@
-<div class="flex">
-  <div class="col-sm-6 col-md-2 border mobile-hide padding">
-    <%= image_tag(@current_user.photo.url(:dashboard)) %>
-      <div class="caption">
-        <h4><%= @current_user.username.capitalize %></h4>
-        <div class="dropdown float-left list-group no-margin-bot">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-             <h4 class="subheader">Commiserating<span class="badge"><%= @following_count %></span></h4>
-          </a>
-          <ul class="dropdown-menu dropdown-list" role="menu">
-            <% @current_user.following_users.each do |user| %>
-            <li class="list-group-item">
-              <%= link_to user.username.capitalize, [:user, id: user.id], class: "list-link" %>
-              <%= link_to 'Unfollow', unfollow_path(id: user.id), method: :delete, class: "list-link color" %>
-            </li>
+<div class="dashboard-body">
+  <div class="dashboard">
+
+    <nav class="navbar navbar-default">
+      <div class="container ninety-percent">
+        <div class="container-fluid nav-alignment">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <% if @current_user.nil? %>
+              <%= link_to "Bitter", :root, class:"navbar-brand" %>
+            <% else %>
+              <%= link_to "Bitter", [:dashboard, id: @current_user.id], class:"navbar-brand" %>
             <% end %>
+          </div>
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+              <!-- <form class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+              </form> -->
+              <% if !@current_user.nil?%>
+              <%= image_tag(@current_user.photo.url(:nav)) %>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= @current_user.username %> <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><%= link_to "Profile", [:user, id: @current_user.id] %></li>
+                    <li><%= link_to "Edit Account", [:edit_user, id: @current_user.id] %></li>
+                    <li class="divider"></li>
+                    <li><%= link_to "Sign Out", :sign_out, method: :delete %></li>
+                  </ul>
+                </li>
+              <% end %>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    </div>
+
+    <div class="container ninety-percent dashboard-content">
+      <div class="flex">
+        <div class="col-sm-6 col-md-2 user-aside mobile-hide padding">
+          <%= image_tag(@current_user.photo.url(:dashboard)) %>
+            <div class="caption">
+              <h4><%= @current_user.username.capitalize %></h4>
+              <div class="dropdown float-left list-group no-margin-bot">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                   <h5 class="subheader">Commiserating<span class="badge"><%= @current_user.following_users.count %></span></h5>
+                </a>
+                <ul class="dropdown-menu dropdown-list" role="menu">
+                  <% @current_user.following_users.each do |user| %>
+                  <li class="list-group-item">
+                    <%= link_to user.username.capitalize, [:user, id: user.id], class: "list-link" %>
+                    <%= link_to 'Unfollow', unfollow_path(id: user.id), method: :delete, class: "list-link color" %>
+                  </li>
+                  <% end %>
+                </ul>
+              </div>
+              <div class="dropdown float-left list-group">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                   <h5 class="subheader">Commiserators<span class="badge"><%= @current_user.followers_count %></span></h5>
+                </a>
+                <ul class="dropdown-menu dropdown-list" role="menu">
+                  <% @current_user.followers.each do |user| %>
+                  <li class="list-group-item">
+                    <%= link_to user.username.capitalize, [:user, id: user.id], class: "list-link" %>
+                    <% if @users.include? @user %>
+                      <%= link_to 'Unfollow', unfollow_path(id: user.id), method: :delete, class: "list-link color" %>
+                    <% end %>
+                  </li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        <div class="col-md-7 margin-one bitch-deck">
+          <%= simple_form_for @post do |f| %>
+            <%= f.input :content, label: false, placeholder: "Bitch Away!" %>
+            <%= f.input :tag_list, label: false, placeholder: "Add Bitch Categories Seperated By Commas" %>
+            <div class="photo-bitch">
+              <%= f.input :photo, label: false %>
+              <div class="float-right">
+                <%= f.submit "Bitch", class: "btn btn-primary bitch-btn"%>
+              </div>
+            </div>
+          <% end %>
+          <ul class="list-group">
+            <% @posts.each do |post|%>
+              <li class="list-group-item bitch">
+                <div class="media">
+                  <% if post.photo.present? %>
+                    <div class="media-left media-middle">
+                      <%= image_tag(post.photo.url(:dashboard)) %>
+                    </div>
+                  <% end %>
+                    <div class="media-body">
+                      <%= post.content%>
+                      <br>
+                      <p>
+                        Bitched <%= distance_of_time_in_words_to_now(post.created_at)%>
+                        ago by <%= link_to post.user.username, [:user, id: post.user_id]%>
+                      </p>
+                    </div>
+                  <% end %>
+              </div>
+            </li>
           </ul>
         </div>
-        <div class="dropdown float-left list-group">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-             <h4 class="subheader">Commiserators<span class="badge"><%= @current_user.followers_count %></span></h4>
-          </a>
-          <ul class="dropdown-menu dropdown-list" role="menu">
-            <% @current_user.followers.each do |user| %>
+        <div class="float-right inline col-md-2 random-user-aside">
+          <h4>People With Lives <br> Probably Worse Than Yours</h4>
+            <% @random_users.each do |user| %>
             <li class="list-group-item">
-              <%= link_to user.username.capitalize, [:user, id: user.id], class: "list-link" %>
-              <%= link_to 'Unfollow', unfollow_path(id: user.id), method: :delete, class: "list-link color" %>
-            </li>
+                <%= link_to user.username.capitalize, [:user, id: user.id], class: "username" %>
+                <%= link_to "Commiserate", [:follow, id: user.id], method: :post %>
+              </li>
             <% end %>
-          </ul>
         </div>
       </div>
     </div>
-  <div class="col-md-6 margin-one">
-    <%= simple_form_for @post do |f| %>
-      <%= f.input :content, label: false, placeholder: "Bitch Away!" %>
-      <%= f.input :tag_list, label: false, placeholder: "Add Bitch Categories Seperated By Commas" %>
-      <div class="photo-bitch">
-        <%= f.input :photo, label: false %>
-        <div class="float-right">
-          <%= f.submit "Bitch", class: "btn btn-primary bitch-btn"%>
-        </div>
-      </div>
-    <% end %>
-    <ul class="list-group">
-      <% @posts.each do |post|%>
-        <li class="list-group-item bitch">
-          <div class="media">
-            <% if post.photo.present? %>
-              <div class="media-left media-middle">
-                <%= image_tag(post.photo.url(:dashboard)) %>
-              </div>
-            <% end %>
-              <div class="media-body">
-                <%= post.content%>
-                <br>
-                <p>
-                  Bitched <%= distance_of_time_in_words_to_now(post.created_at)%>
-                  ago by <%= link_to post.user.username, [:user, id: post.user_id]%>
-                </p>
-              </div>
-            <% end %>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <div class="float-right inline">
-    <h4>People With Lives <br> Probably Worse Than Yours</h4>
-      <% @random_users.each do |user| %>
-      <li class="list-group-item">
-          <%= link_to user.username.capitalize, [:user, id: user.id] %>
-          <%= link_to "Commiserate", [:follow, id: user.id], method: :post %>
-        </li>
-      <% end %>
+
   </div>
 </div>

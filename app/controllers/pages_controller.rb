@@ -5,8 +5,12 @@ class PagesController < ApplicationController
   end
 
   def index
-    @posts = Post.all
-    @user = User.new
+    if @current_user.nil?
+      @posts = Post.all
+      @user = User.new
+    else
+      redirect_to [:dashboard, id: @current_user.id]
+    end
   end
 
   def dashboard
@@ -18,7 +22,6 @@ class PagesController < ApplicationController
      posts_ids = followers_ids << @current_user.id
      @posts = Post.where(user_id: posts_ids).order("created_at desc")
      @users = User.all.reject{|user| @current_user.following? user}.reject{|user| @current_user == user}
-     @following_count = @current_user.following_users.count
      @random_users = @users.sample(5)
    end
   end
@@ -48,6 +51,8 @@ class PagesController < ApplicationController
       redirect_to :root
     else
       @user = User.find(params[:id])
+      @users = User.all.reject{|user| @current_user.following? user}.reject{|user| @current_user == user}
+      @posts = Post.where(user_id: @user.id).order("created_at desc")
     end
   end
 
@@ -55,7 +60,8 @@ class PagesController < ApplicationController
   def follow
     user = User.find params[:id]
     @current_user.follow user
-    redirect_to :dashboard, notice: "You're now commiserating with #{user.username}"
+    flash.now[:notice] = "You're now commiserating with #{user.username}"
+    redirect_to :dashboard
   end
 
   def unfollow

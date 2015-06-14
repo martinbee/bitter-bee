@@ -1,4 +1,109 @@
 
+<div class="profile">
+  <nav class="navbar navbar-default">
+    <div class="container ninety-percent">
+      <div class="container-fluid nav-alignment">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <% if @current_user.nil? %>
+            <%= link_to "Bitter", :root, class:"navbar-brand" %>
+          <% else %>
+            <%= link_to "Bitter", [:dashboard, id: @current_user.id], class:"navbar-brand" %>
+          <% end %>
+        </div>
 
-<h1><%= @user.username %></h1>
-<%= image_tag(@user.photo.url(:profile)) %>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <!-- <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form> -->
+            <% if !@current_user.nil?%>
+            <%= image_tag(@current_user.photo.url(:nav)) %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><%= @current_user.username %> <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><%= link_to "Profile", [:user, id: @current_user.id] %></li>
+                  <li><%= link_to "Edit Account", [:edit_user, id: @current_user.id] %></li>
+                  <li class="divider"></li>
+                  <li><%= link_to "Sign Out", :sign_out, method: :delete %></li>
+                </ul>
+              </li>
+            <% end %>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </div>
+  </nav>
+  <div class="container ninety-percent">
+    <div class="col-md-3 float-left mobile-full-width padding  profile-content">
+      <%= image_tag(@user.photo.url(:profile)) %>
+      <h1><%= @user.username %></h1>
+      <div class="no-padding">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+           <h4 class="subheader">Commiserating<span class="badge"><%= @user.following_users.count %></span></h4>
+        </a>
+        <ul class="dropdown-menu dropdown-list" role="menu">
+          <% @user.following_users.each do |user| %>
+          <li class="list-group-item">
+            <%= link_to user.username.capitalize, [:user, id: user.id], class: "list-link" %>
+            <% if (@users.include? @user) && (@current_user == @user) %>
+              <%= link_to 'Unfollow', unfollow_path(id: user.id), method: :delete, class: "list-link color" %>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="no-padding">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+           <h4 class="subheader">Commiserators<span class="badge"><%= @user.followers_count %></span></h4>
+        </a>
+        <ul class="dropdown-menu dropdown-list" role="menu">
+          <% @user.followers.each do |user| %>
+          <li class="list-group-item">
+            <%= link_to user.username.capitalize, [:user, id: user.id], class: "list-link" %>
+            <% if (@users.include? @user) && (@current_user == @user) %>
+              <%= link_to 'Unfollow', unfollow_path(id: user.id), method: :delete, class: "list-link color" %>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+      <% if (@users.include? @user) %>
+        <%= link_to "Commiserate", [:follow, id: @user.id], method: :post %>
+      <% elsif (@current_user.following? @user) %>
+      <%= link_to 'Unfollow', [:unfollow, id: @user.id], method: :delete, class: "list-link color" %>
+      <% end %>
+    </div>
+    <aside class="col-md-9 float-left mobile-full-width aside-right">
+      <h2 class="center underline"> Recent Bitching </h2>
+        <% @posts.each do |post|%>
+          <li class="list-group-item bitch col-md-12 float-left">
+            <div class="media">
+              <% if post.photo.present? %>
+                <div class="media-left media-middle">
+                  <%= image_tag(post.photo.url(:dashboard)) %>
+                </div>
+              <% end %>
+                <div class="media-body">
+                  <%= post.content%>
+                  <br>
+                  <p>
+                    Bitched <%= distance_of_time_in_words_to_now(post.created_at)%>
+                    ago by <%= link_to post.user.username, [:user, id: post.user_id]%>
+                  </p>
+                </div>
+              <% end %>
+          </div>
+        </li>
+    </aside>
+  </div>
+</div>
