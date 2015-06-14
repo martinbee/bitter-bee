@@ -14,12 +14,13 @@ class PagesController < ApplicationController
       redirect_to :root
     else
       @post = Post.new
-    end
-   followers_ids = @current_user.following_users.pluck(:id)
-   posts_ids = followers_ids << @current_user.id
-   @posts = Post.where(user_id: posts_ids).order("created_at desc")
-   @users = User.all.reject{|user| @current_user.following? user}.reject{|user| @current_user == user}
-   @follower_count = @current_user.following_users.count
+     followers_ids = @current_user.following_users.pluck(:id)
+     posts_ids = followers_ids << @current_user.id
+     @posts = Post.where(user_id: posts_ids).order("created_at desc")
+     @users = User.all.reject{|user| @current_user.following? user}.reject{|user| @current_user == user}
+     @following_count = @current_user.following_users.count
+     @random_users = @users.sample(5)
+   end
   end
 
   def new

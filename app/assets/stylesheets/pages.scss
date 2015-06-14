@@ -1,3 +1,22 @@
+.ninety-percent{
+  width: 90%;
+}
+
+.padding {
+  padding: 10px;
+}
+
+.margin-one{
+  margin-left: 2.3%;
+}
+
+.border {
+  border: solid 1px #E67E22;
+}
+.no-margin-bot{
+  margin-bottom: 0px;
+}
+
 .badge {
   margin-left: 10px;
 }
@@ -39,7 +58,6 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap-reverse;
-  align-content: flex-end;
 
   .main {
     width: 75%;
@@ -59,21 +77,37 @@
 }
 
 .bitch-btn {
-  width: 300%;
+  width: 200%;
   margin-top: -10px;
   flex: 1;
 }
 
 .float-right {
+  float:right;
+}
+
+.inline {
+  display: inline;
+}
+
+.float-left {
   float:left;
 }
 
 
-@media (max-width: 900px) {
+@media (max-width: 1050px) {
   .flex {
    display: flex;
    flex-wrap: wrap;
    flex-direction: row;
   }
 
+.mobile-hide {
+  display:none;
+  overflow: hidden;
+}
+
+.border {
+  border: none;
+}
 }

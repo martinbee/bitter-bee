@@ -3,6 +3,7 @@
   <%= simple_form_for @user do |f| %>
       <%= f.input :username %>
       <%= f.input :email %>
+      <%= f.input :photo, label:"Profile Picture" %>
       <%= f.input :password, hint: "Must be longer than 8 characters" %>
       <%= f.input :password_confirmation %>
       <%= f.submit class: "btn btn-primary" %>
