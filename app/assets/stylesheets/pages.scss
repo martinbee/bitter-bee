@@ -1,0 +1,79 @@
+.badge {
+  margin-left: 10px;
+}
+
+.subheader {
+  text-decoration: none;
+  color: black;
+}
+
+.dropdown-list {
+  box-shadow: none;
+  border: none;
+}
+
+.edit-btn {
+  margin-bottom: 30px;
+}
+
+.list-group-item {
+  .list-link {
+    display: inline;
+    padding: 0px;
+    margin-left: 10px;
+  }
+  .color {
+    color: blue;
+  }
+}
+
+.form-btn {
+  width: 100%;
+}
+
+.nav-alignment {
+  padding: 0px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap-reverse;
+  align-content: flex-end;
+
+  .main {
+    width: 75%;
+  }
+  .aside {
+    float: right;
+  }
+}
+
+.photo-bitch {
+  display: flex;
+}
+
+.bitch {
+  margin-top: 10px;
+  border: 1px solid blue;
+}
+
+.bitch-btn {
+  width: 300%;
+  margin-top: -10px;
+  flex: 1;
+}
+
+.float-right {
+  float:left;
+}
+
+
+@media (max-width: 900px) {
+  .flex {
+   display: flex;
+   flex-wrap: wrap;
+   flex-direction: row;
+  }
+
+}
