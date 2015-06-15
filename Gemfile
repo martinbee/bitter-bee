@@ -13,6 +13,7 @@ gem 'acts_as_follower'
 gem 'rails_autolink'
 gem 'simple_form'
 gem 'faker'
+gem 'normalize-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'

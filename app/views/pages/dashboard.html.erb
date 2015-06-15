@@ -99,7 +99,7 @@
                 <div class="media">
                   <% if post.photo.present? %>
                     <div class="media-left media-middle">
-                      <%= image_tag(post.photo.url(:dashboard)) %>
+                      <%= link_to image_tag(post.photo.url(:full), height: 75, width: 75), post.photo.url(:full), :target => "_blank" %>
                     </div>
                   <% end %>
                     <div class="media-body">
