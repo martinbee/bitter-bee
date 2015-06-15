@@ -57,8 +57,9 @@
                 <ul class="dropdown-menu dropdown-list" role="menu">
                   <% @current_user.following_users.each do |user| %>
                   <li class="list-group-item">
-                    <%= link_to user.username.capitalize, [:user, id: user.id], class: "list-link" %>
-                    <%= link_to 'Unfollow', unfollow_path(id: user.id), method: :delete, class: "list-link color" %>
+                    <%= link_to user.username, [:user, id: user.id], class: "list-link" %>
+                  </br>
+                    <%= link_to 'Unfollow', [:unfollow, id: user.id], method: :delete, class: "list-link color" %>
                   </li>
                   <% end %>
                 </ul>
@@ -70,9 +71,10 @@
                 <ul class="dropdown-menu dropdown-list" role="menu">
                   <% @current_user.followers.each do |user| %>
                   <li class="list-group-item">
-                    <%= link_to user.username.capitalize, [:user, id: user.id], class: "list-link" %>
+                    <%= link_to user.username, [:user, id: user.id], class: "list-link" %>
+                  </br>
                     <% if @users.include? @user %>
-                      <%= link_to 'Unfollow', unfollow_path(id: user.id), method: :delete, class: "list-link color" %>
+                      <%= link_to 'Unfollow', [:unfollow, id: user.id], method: :delete, class: "list-link color" %>
                     <% end %>
                   </li>
                   <% end %>
@@ -107,18 +109,20 @@
                         Bitched <%= distance_of_time_in_words_to_now(post.created_at)%>
                         ago by <%= link_to post.user.username, [:user, id: post.user_id]%>
                       </p>
+                      <span class="vote"><%= link_to (image_tag "thumbs_down.png", width: 15, height: 15), [:vote, id: post.id] %></span>
                     </div>
                   <% end %>
               </div>
             </li>
           </ul>
+          <%= paginate @posts %>
         </div>
         <div class="float-right inline col-md-2 random-user-aside">
           <h4>People With Lives <br> Probably Worse Than Yours</h4>
             <% @random_users.each do |user| %>
             <li class="list-group-item">
-                <%= link_to user.username.capitalize, [:user, id: user.id], class: "username" %>
-                <%= link_to "Commiserate", [:follow, id: user.id], method: :post %>
+                <%= link_to user.username, [:user, id: user.id], class: "username" %></br>
+                <%= link_to "Commiserate", [:follow, id: user.id], method: :post, class: "follow" %>
               </li>
             <% end %>
         </div>

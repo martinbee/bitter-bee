@@ -7,8 +7,28 @@
     <div class="content">
       <div class="main">
         <h1>Top Bitches</h1>
-        <p>Find me in app/views/pages/index.html.erb</p>
-        <%= @current_user.nil? %>
+        <ol class="list-group">
+          <% @top_posts.each do |post|%>
+            <li class="list-group-item bitch">
+              <div class="media">
+                <% if post.photo.present? %>
+                  <div class="media-left media-middle">
+                    <%= image_tag(post.photo.url(:dashboard)) %>
+                  </div>
+                <% end %>
+                  <div class="media-body">
+                    <%= post.content%>
+                    <br>
+                    <p>
+                      Bitched <%= distance_of_time_in_words_to_now(post.created_at)%>
+                      ago by <span class="top-posts-name"><%= post.user.username %></span>
+                    </p>
+                    <span class="badge"><%= post.votes %></span>
+                  </div>
+                <% end %>
+            </div>
+          </li>
+        </ol>
       </div>
 
       <aside class="col-md-3 mobile-full-width">

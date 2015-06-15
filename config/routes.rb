@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post 'follow/:id' => 'pages#follow', as: :follow
   delete 'unfollow/:id' => 'pages#unfollow', as: :unfollow
   get '/:id/profile' => 'pages#profile', as: :user
+  get '/vote/:id' => 'pages#vote', as: :vote
 
   get 'sign-in' => 'session#new', as: :sign_in
   post 'sign-in' => 'session#create', as: :auth

@@ -28,7 +28,11 @@
     flex-direction: row;
     flex-wrap: wrap-reverse;
     .main {
-      width: 75%;
+      width: 65%;
+      margin-right:10%;
+      .top-posts-name {
+        color: #FF7871;
+      }
     }
     .aside {
       float: right;
@@ -38,13 +42,13 @@
 
 .dashboard-body {
   background-color: #40FD98; //background color!
-  height: 900px;
+  height: 100%;
   .dashboard {
     .nav, .navbar, .navbar-brand {
       background-color: white;
       color: black;
       &:hover {
-        color: grey;
+        color: #54F59F;
       }
     }
     .dropdown {
@@ -66,14 +70,29 @@
       .user-aside {
        background-color: white;
        border-radius: 10px;
+       .list-group-item {
+         .list-link {
+           display: inline;
+           padding: 0px;
+         }
+         .color {
+           color: #FF7871;
+         }
+       }
       }
       .random-user-aside {
         background-color: white;
         border-radius: 10px;
         .list-group-item {
-
-          border-radius: 10px;
           margin-bottom: 10px;
+          border-left: none;
+          border-right: none;
+          border-bottom: none;
+          border-top: 1px solid #B8ADB1;
+          padding:none;
+          .follow {
+            color: #FF7871;
+          }
         }
       }
       .bitch-deck {
@@ -149,20 +168,6 @@
   border: none;
 }
 
-.edit-btn {
-  margin-bottom: 30px;
-}
-
-.list-group-item {
-  .list-link {
-    display: inline;
-    padding: 0px;
-  }
-  .color {
-    color: blue;
-  }
-}
-
 .form-btn {
   width: 100%;
 }
@@ -177,7 +182,12 @@
 
 .bitch {
   margin-top: 10px;
-  border: 1px solid #FF7871;
+  border-top: 1px solid #B8ADB1;
+  border-left:none;
+  border-right:none;
+  border-bottom: none;
+  border-radius: 0px;
+
 }
 
 .bitch-btn {
@@ -223,6 +233,9 @@
     border-radius: 10px;
 
   }
+  .top-posts-name {
+    color: #FF7871;
+  }
   .bitch {
     font-size: 1.3em;
   }
@@ -230,7 +243,7 @@
     background-color: white;
     color: black;
     &:hover {
-      color: grey;
+      color: #54F59F;
     }
   }
 }
@@ -240,13 +253,46 @@
     background-color: white;
     color: black;
     &:hover {
-      color: grey;
+      color: #54F59F;
     }
   }
-
 }
 
+.edit-btn {
+  margin-bottom: 30px;
+  border-color: #BB5CF4;
+  background-color: #BB5CF4;
+&:hover {
+  background-color: #B435FF;
+  border-color: #B435FF;
+}
+}
+.edit-header {
+  color: white;
+  background-color: #FFBE6B !important;
+  text-align: center;
+}
 
+.pagination {
+  .active {
+    a {
+      background-color: #BB5CF4;
+      border-color: #BB5CF4;
+      &:hover {
+        background-color: #9213DD;
+        border-color: #9213DD;
+      }
+    }
+  }
+  li {
+    a {
+    color: #BB5CF4;
+    &:hover {
+      color: #9213DD;
+    }
+  }
+  }
+}
 @media (max-width: 1050px) {
 
   .jumbotron {

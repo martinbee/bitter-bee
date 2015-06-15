@@ -47,7 +47,7 @@
     <% if notice %>
     <%= notice %>
     <% end %>
-    <h1 class="page-header jumbotron ">Edit Account</h1>
+    <h1 class="page-header jumbotron edit-header ">Edit Account</h1>
     <%= simple_form_for @user do |f| %>
         <%= f.input :username %>
         <%= f.input :photo, label:"Change Profile Picture" %>

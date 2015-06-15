@@ -54,7 +54,7 @@
         <ul class="dropdown-menu dropdown-list" role="menu">
           <% @user.following_users.each do |user| %>
           <li class="list-group-item">
-            <%= link_to user.username.capitalize, [:user, id: user.id], class: "list-link" %>
+            <%= link_to user.username, [:user, id: user.id], class: "list-link" %>
             <% if (@users.include? @user) && (@current_user == @user) %>
               <%= link_to 'Unfollow', unfollow_path(id: user.id), method: :delete, class: "list-link color" %>
             <% end %>
@@ -69,7 +69,7 @@
         <ul class="dropdown-menu dropdown-list" role="menu">
           <% @user.followers.each do |user| %>
           <li class="list-group-item">
-            <%= link_to user.username.capitalize, [:user, id: user.id], class: "list-link" %>
+            <%= link_to user.username, [:user, id: user.id], class: "list-link" %>
             <% if (@users.include? @user) && (@current_user == @user) %>
               <%= link_to 'Unfollow', unfollow_path(id: user.id), method: :delete, class: "list-link color" %>
             <% end %>
@@ -85,7 +85,7 @@
     </div>
     <aside class="col-md-9 float-left mobile-full-width aside-right">
       <h2 class="center underline"> Recent Bitching </h2>
-        <% @posts.each do |post|%>
+        <% @recent_posts.each do |post|%>
           <li class="list-group-item bitch col-md-12 float-left">
             <div class="media">
               <% if post.photo.present? %>
@@ -98,7 +98,7 @@
                   <br>
                   <p>
                     Bitched <%= distance_of_time_in_words_to_now(post.created_at)%>
-                    ago by <%= link_to post.user.username, [:user, id: post.user_id]%>
+                    ago by <span class="top-posts-name"> <%= post.user.username %></span>
                   </p>
                 </div>
               <% end %>

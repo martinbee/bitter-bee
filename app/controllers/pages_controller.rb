@@ -6,7 +6,8 @@ class PagesController < ApplicationController
 
   def index
     if @current_user.nil?
-      @posts = Post.all
+      @posts = Post.all.order("votes desc")
+      @top_posts = @posts.first(5)
       @user = User.new
     else
       redirect_to [:dashboard, id: @current_user.id]
@@ -20,7 +21,7 @@ class PagesController < ApplicationController
       @post = Post.new
      followers_ids = @current_user.following_users.pluck(:id)
      posts_ids = followers_ids << @current_user.id
-     @posts = Post.where(user_id: posts_ids).order("created_at desc")
+     @posts = Post.where(user_id: posts_ids).order("created_at desc").page(params[:page])
      @users = User.all.reject{|user| @current_user.following? user}.reject{|user| @current_user == user}
      @random_users = @users.sample(5)
    end
@@ -53,6 +54,7 @@ class PagesController < ApplicationController
       @user = User.find(params[:id])
       @users = User.all.reject{|user| @current_user.following? user}.reject{|user| @current_user == user}
       @posts = Post.where(user_id: @user.id).order("created_at desc")
+      @recent_posts = @posts.first(10)
     end
   end
 
@@ -60,14 +62,24 @@ class PagesController < ApplicationController
   def follow
     user = User.find params[:id]
     @current_user.follow user
-    flash.now[:notice] = "You're now commiserating with #{user.username}"
-    redirect_to :dashboard
+    redirect_to :dashboard, notice: "You're now commiserating with #{user.username}"
   end
 
   def unfollow
     user = User.find params[:id]
     @current_user.stop_following user
     redirect_to :dashboard, notice: "$%@! #{user.username}"
+  end
+
+  def vote
+    @post = Post.find params[:id]
+    @post.votes += 1
+    @post.save
+    redirect_to [:dashboard, id: @current_user.id]
+  end
+
+  def block_user(user)
+    block(user)
   end
 
   private
