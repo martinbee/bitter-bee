@@ -345,9 +345,11 @@
 .margin-one {
   margin: 0px;
 }
-
-.caption {
-  height: 70px;
 }
 
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+
+  .caption {
+    height: 100px;
+  }
 }
