@@ -46,7 +46,7 @@
 
     <div class="container ninety-percent dashboard-content">
       <div class="flex">
-        <div class="col-sm-6 col-md-2 user-aside mobile-hide padding">
+        <div class="col-md-2 user-aside mobile-hide padding">
           <%= image_tag(@current_user.photo.url(:dashboard)) %>
             <div class="caption">
               <h4><%= @current_user.username.capitalize %></h4>
@@ -87,12 +87,11 @@
             <%= f.input :content, label: false, placeholder: "Bitch Away!" %>
             <%= f.input :tag_list, label: false, placeholder: "Add Bitch Categories Seperated By Commas" %>
             <div class="photo-bitch">
-              <%= f.input :photo, label: false %>
-              <div class="float-right">
-                <%= f.submit "Bitch", class: "btn btn-primary bitch-btn"%>
-              </div>
+              <%= f.input :photo, label: false, class: "col-md-8" %>
+              <%= f.submit "Bitch", class: "btn btn-primary bitch-btn col-md-4"%>
             </div>
           <% end %>
+        </br>
           <ul class="list-group">
             <% @posts.each do |post|%>
               <li class="list-group-item bitch">
@@ -117,7 +116,7 @@
           </ul>
           <%= paginate @posts %>
         </div>
-        <div class="float-right inline col-md-2 random-user-aside">
+        <div class="float-right col-md-2 random-user-aside">
           <h4>People With Lives <br> Probably Worse Than Yours</h4>
             <% @random_users.each do |user| %>
             <li class="list-group-item">
@@ -128,6 +127,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
