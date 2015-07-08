@@ -13,12 +13,14 @@
       font-size: 6em;
       width: 90%;
       margin: auto;
+      font-family: 'Exo', sans-serif;
      }
   }
   .btn, .btn-primary, .form-btn{
     margin-bottom: 10px !important;
     background-color: #BB5CF4;
     border-color: #BB5CF4;
+    font-family: 'Vollkorn', serif;
     &:hover {
       background-color: #B435FF;
       border-color: #B435FF;
@@ -72,6 +74,7 @@
        background-color: white;
        border-radius: 10px;
        .list-group-item {
+         font-family: 'Vollkorn', serif;
          .list-link {
            display: inline;
            padding: 0px;
@@ -91,6 +94,7 @@
           border-bottom: none;
           border-top: 1px solid #B8ADB1;
           padding:none;
+          font-family: 'Vollkorn', serif;
           .follow {
             color: #FF7871;
           }
@@ -118,7 +122,9 @@
   width: 90%;
 }
 
-
+h1, h3, h4 {
+  font-family: 'Exo', sans-serif;
+}
 
 .header {
   width: 40%;
@@ -188,6 +194,7 @@
   border-right:none;
   border-bottom: none;
   border-radius: 0px;
+  font-family: 'Vollkorn', serif;
 }
 
 .bitch-btn {
@@ -225,6 +232,7 @@
     border-radius: 10px;
     .list-group-item {
       border:none;
+      font-family: 'Vollkorn', serif;
     }
   }
   .aside-right {
@@ -330,6 +338,10 @@
       display:none;
       overflow: hidden;
   }
+}
+
+.profile {
+  height: 100%;
 }
 
 .main {
